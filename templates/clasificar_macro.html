@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Clasificador Macro{% endblock %}
+
+{% block content %}
+<div class="card shadow p-4 mb-4">
+    <h3 class="mb-4 text-primary">Clasificar un Alimento por Macro</h3>
+    <form method="POST">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre del Alimento</label>
+                <input type="text" class="form-control" name="nombre" id="nombre" required>
+            </div>
+            <div class="col-md-2">
+                <label for="grasas" class="form-label">Grasas (g)</label>
+                <input type="number" step="any" class="form-control" name="grasas" id="grasas" required>
+            </div>
+            <div class="col-md-2">
+                <label for="proteinas" class="form-label">Proteínas (g)</label>
+                <input type="number" step="any" class="form-control" name="proteinas" id="proteinas" required>
+            </div>
+            <div class="col-md-2">
+                <label for="carbohidratos" class="form-label">Carbohidratos (g)</label>
+                <input type="number" step="any" class="form-control" name="carbohidratos" id="carbohidratos" required>
+            </div>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success">Clasificar</button>
+        </div>
+    </form>
+</div>
+
+<h4 class="mb-3 text-secondary">Alimentos Clasificados</h4>
+{% if alimentos %}
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Clasificación</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in alimentos %}
+        <tr class="{% if a.clasificacion == 'Fuente de Grasas' %}table-warning{% elif a.clasificacion == 'Fuente de Proteínas' %}table-info{% else %}table-success{% endif %}">
+            <td>{{ a.nombre }}</td>
+            <td>{{ a.clasificacion }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-secondary">Aún no hay alimentos clasificados.</div>
+{% endif %}
+{% endblock %}

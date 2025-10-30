@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Resultados{% endblock %}
+
+{% block content %}
+<h3 class="text-primary mb-4">Resultados de Clasificación</h3>
+
+{% if alimentos %}
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre del Alimento</th>
+            <th>Clasificación</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in alimentos %}
+        <tr class="{% if a.clasificacion == 'Fuente de Grasas' %}table-warning{% elif a.clasificacion == 'Fuente de Proteínas' %}table-info{% else %}table-success{% endif %}">
+            <td>{{ a.nombre }}</td>
+            <td>{{ a.clasificacion }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<form action="{{ url_for('limpiar') }}" method="POST" class="mt-3 text-center">
+    <button type="submit" class="btn btn-danger btn-lg">Limpiar Todos los Alimentos</button>
+</form>
+{% else %}
+<div class="alert alert-secondary">No hay alimentos clasificados aún.</div>
+{% endif %}
+
+<div class="text-center mt-4">
+    <a href="{{ url_for('clasificar_macro') }}" class="btn btn-primary btn-lg">← Volver al inicio</a>
+</div>
+{% endblock %}
