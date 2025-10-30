@@ -36,14 +36,24 @@
     <thead class="table-dark">
         <tr>
             <th>Nombre</th>
+            <th>Calorías</th>
             <th>Clasificación</th>
+            <th>Predominante</th>
+            <th>Grasas (g)</th>
+            <th>Proteínas (g)</th>
+            <th>Carbohidratos (g)</th>
         </tr>
     </thead>
     <tbody>
         {% for a in alimentos %}
-        <tr class="{% if a.clasificacion == 'Fuente de Grasas' %}table-warning{% elif a.clasificacion == 'Fuente de Proteínas' %}table-info{% else %}table-success{% endif %}">
+        <tr class="{% if a.clasificacion == 'Fuente de Grasas' %}table-warning{% elif a.clasificacion == 'Fuente de Proteínas' %}table-info{% elif a.clasificacion == 'Fuente de Carbohidratos' %}table-success{% endif %}">
             <td>{{ a.nombre }}</td>
+            <td>{{ a.calorias }}</td>
             <td>{{ a.clasificacion }}</td>
+            <td>{{ a.predominante }}</td>
+            <td>{{ a.grasas }}</td>
+            <td>{{ a.proteinas }}</td>
+            <td>{{ a.carbohidratos }}</td>
         </tr>
         {% endfor %}
     </tbody>
